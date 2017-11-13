@@ -3,4 +3,4 @@ plugin:
     description: 'vdomah.translatetabs::lang.plugin.description'
     author: Vdomah
     icon: oc-icon-list-alt
-    homepage: ''
+    homepage: 'https://github.com/vdomah/oc-translatetabs'
