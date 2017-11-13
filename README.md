@@ -1,5 +1,5 @@
 # Translate Tabs plugin
-Plugin adds possibility to display translatable fields grouped by tabs.
+Plugin adds possibility to display translatable fields grouped by tabs using translations formwidget.
 
 ## Requirements
 #### RainLab.Translate plugin
@@ -14,3 +14,26 @@ besides TranslatableModel behavior. Then define translatable attributes as you w
     ];
 
     public $translatable = ['name', 'excerpt', 'slug'];
+
+In fields.yaml need to define _translations field like this:
+
+    _translations:
+        span: left
+        type: translations
+        form:
+            fields:
+                name:
+                    label: Name
+                    span: auto
+                    type: text
+                slug:
+                    label: Slug
+                    span: auto
+                    preset:
+                        field: name
+                        type: slug
+                    type: text
+                excerpt:
+                    label: Excerpt
+                    span: auto
+                    type: textarea
