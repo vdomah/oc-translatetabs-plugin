@@ -1,0 +1,4 @@
+<script src="https://cdn.ckeditor.com/4.6.1/standard-all/ckeditor.js"></script>
+<?php foreach ($this->formWidgets as $index => $widget): ?>
+    <?= $this->makePartial($this->viewPathWidget . 'tabs', ['tabs' => $this->tabs]) ?>
+<?php endforeach ?>

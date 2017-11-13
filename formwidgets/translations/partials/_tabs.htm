@@ -1,0 +1,53 @@
+<?php
+$navCss = '';
+$contentCss = '';
+$paneCss = '';
+
+$navCss = 'layout-row min-size';
+$contentCss = 'layout-row';
+$paneCss = 'layout-cell';
+?>
+<div
+        class="control-tabs primary-tabs layout has-tabs"
+        data-control="tab"
+        data-slidable>
+    <div class="<?= $navCss ?>">
+        <ul class="nav nav-tabs">
+            <?php $index = 0; foreach ($tabs as $name => $fields): ?>
+            <li class="<?= $index++==0?'active':''?>"><a href="#<?= 'primarytab-'.$index ?>"><?= e(trans($name)) ?></a></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+
+    <div class="tab-content <?= $contentCss ?>">
+        <?php $index = 0; foreach ($tabs as $name => $fields): ?>
+        <div
+                class="tab-pane <?= $index++==0?'active':''?> <?= $paneCss ?>"
+                id="<?= 'primarytab-'.$index ?>">
+            <?= $this->makePartial(base_path() . '/modules/backend/widgets/form/partials/form_fields', ['fields' => $fields]) ?>
+        </div>
+        <?php endforeach ?>
+    </div>
+
+</div>
+<script>
+    if (typeof CKEDITOR == 'function')
+    CKEDITOR.on('instanceReady', function(){
+        $.each( CKEDITOR.instances, function(instance) {
+
+            CKEDITOR.instances[instance].on("instanceReady", function() {
+                this.document.on("keyup", CK_jQ);
+                this.document.on("paste", CK_jQ);
+                this.document.on("keypress", CK_jQ);
+                this.document.on("blur", CK_jQ);
+                this.document.on("change", CK_jQ);
+            });
+        });
+
+    });
+
+    function CK_jQ() {
+        console.log('CK_jQ', CK_jQ)
+        for ( var instance in CKEDITOR.instances ) { CKEDITOR.instances[instance].updateElement(); }
+    }
+</script>

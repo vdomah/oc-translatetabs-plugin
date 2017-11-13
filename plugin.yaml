@@ -1,0 +1,6 @@
+plugin:
+    name: 'vdomah.translatetabs::lang.plugin.name'
+    description: 'vdomah.translatetabs::lang.plugin.description'
+    author: Vdomah
+    icon: oc-icon-list-alt
+    homepage: ''

@@ -1,0 +1,3 @@
+<?php foreach ($fields as $field): ?>
+<?= $this->makePartial(base_path() . '/modules/backend/widgets/form/partials/field-container', ['field' => $field]) ?>
+<?php endforeach ?>
