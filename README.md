@@ -1,5 +1,5 @@
 # Translate Tabs plugin
-Plugin adds possibility to display translatable fields grouped by tabs using translations formwidget.
+Plugin adds possibility to display translatable fields grouped into tabs by locales using translations formwidget.
 
 ## Requirements
 #### RainLab.Translate plugin
