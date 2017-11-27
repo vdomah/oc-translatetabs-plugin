@@ -1,6 +1,8 @@
 <?php namespace Vdomah\TranslateTabs;
 
+use Cms\Models\ThemeData;
 use System\Classes\PluginBase;
+use Cms\Classes\Theme;
 
 class Plugin extends PluginBase
 {
@@ -22,5 +24,36 @@ class Plugin extends PluginBase
                 'code'  => 'translations'
             ],
         ];
+    }
+
+    public function boot()
+    {
+        ThemeData::extend(function($model) {
+            $theme = Theme::getActiveTheme();
+            $form = $theme->getConfigValue('form');
+            $translations = $this->findThemeTrans($form);
+
+            $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
+            $model->implement[] = 'Vdomah.TranslateTabs.Behaviors.TranslateTabbable';
+            $model->addDynamicProperty('translatable', array_keys($translations));
+        });
+    }
+
+    public function findThemeTrans($arr)
+    {
+        if (!count($arr))
+            return false;
+
+        if ($translations = array_get($arr, '_translations')) {
+            return array_get($translations, 'form.fields');
+        } else {
+            if (is_array($arr))
+                foreach ($arr as $item) {
+                    if ($_trans = $this->findThemeTrans($item))
+                        return $_trans;
+                }
+            else
+                return false;
+        }
     }
 }

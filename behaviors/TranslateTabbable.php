@@ -23,7 +23,13 @@ class TranslateTabbable extends ExtensionBase
             if (App::runningInBackend()) {
                 foreach (LocaleModel::listEnabled() as $locale=>$lang) {
                     if ($locale_data = post($locale)) {
-                        foreach ($this->model->translatable as $attr) {
+                        if (get_class($this->model) == 'Cms\Models\ThemeData') {
+                            $translatable = array_keys($locale_data);
+                            $this->model->translatable = $translatable;
+                        } else {
+                            $translatable = $this->model->translatable;
+                        }
+                        foreach ($translatable as $attr) {
                             if (isset($locale_data[$attr])) {
                                 $this->model->setAttributeTranslated($attr, $locale_data[$attr], $locale);
                             }
@@ -32,6 +38,10 @@ class TranslateTabbable extends ExtensionBase
                 }
 
                 $this->model->syncTranslatableAttributes();
+
+                if (get_class($this->model) == 'Cms\Models\ThemeData') {
+                    unset($this->model->translatable);
+                }
             }
         });
     }
