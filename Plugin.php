@@ -31,11 +31,15 @@ class Plugin extends PluginBase
         ThemeData::extend(function($model) {
             $theme = Theme::getActiveTheme();
             $form = $theme->getConfigValue('form');
-            $translations = $this->findThemeTrans($form);
+            if (is_array($form)) {
+                $translations = $this->findThemeTrans($form);
 
-            $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
-            $model->implement[] = 'Vdomah.TranslateTabs.Behaviors.TranslateTabbable';
-            $model->addDynamicProperty('translatable', array_keys($translations));
+                if (is_array($translations)) {
+                    $model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
+                    $model->implement[] = 'Vdomah.TranslateTabs.Behaviors.TranslateTabbable';
+                    $model->addDynamicProperty('translatable', array_keys($translations));
+                }
+            }
         });
     }
 
