@@ -19,7 +19,7 @@ class TranslateTabbable extends ExtensionBase
     {
         $this->model = $model;
 
-        $this->model->bindEvent('model.beforeSave', function() {
+        $this->model->bindEvent('model.beforeValidate', function() {
             if (App::runningInBackend()) {
                 foreach (LocaleModel::listEnabled() as $locale=>$lang) {
                     if ($locale_data = post($locale)) {
@@ -30,6 +30,9 @@ class TranslateTabbable extends ExtensionBase
                             $translatable = $this->model->translatable;
                         }
                         foreach ($translatable as $attr) {
+                            if (\is_array($attr)) {
+                                $attr = $attr[0];
+                            }
                             if (isset($locale_data[$attr])) {
                                 $this->model->setAttributeTranslated($attr, $locale_data[$attr], $locale);
                             }

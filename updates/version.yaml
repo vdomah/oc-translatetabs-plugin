@@ -2,3 +2,6 @@
     - Initialize plugin.
 1.0.2:
     - Translatable tabs for theme options form.
+1.0.3:
+    - Set translatable attribute values before model validation.
+    - Handle indexed translatable attributes.
