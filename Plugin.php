@@ -45,8 +45,12 @@ class Plugin extends PluginBase
 
     public function findThemeTrans($arr)
     {
-        if (!count($arr))
+        if (is_array($arr)) {
+            if (!count($arr))
+                return false;
+        } else {
             return false;
+        }
 
         if ($translations = array_get($arr, '_translations')) {
             return array_get($translations, 'form.fields');

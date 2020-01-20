@@ -13,18 +13,18 @@ $paneCss = 'layout-cell';
         data-slidable>
     <div class="<?= $navCss ?>">
         <ul class="nav nav-tabs">
-            <?php $index = 0; foreach ($tabs as $name => $fields): ?>
-            <li class="<?= $index++==0?'active':''?>"><a href="#<?= 'primarytab-'.$index ?>"><?= e(trans($name)) ?></a></li>
+            <?php $index = 0; foreach ($tabs as $lang_code => $tab_data): ?>
+            <li class="<?= $index++==0?'active':''?>"><a href="#<?= 'primarytab-'.$index ?>"><?= e(trans($tab_data['label'])) ?></a></li>
             <?php endforeach ?>
         </ul>
     </div>
 
     <div class="tab-content <?= $contentCss ?>">
-        <?php $index = 0; foreach ($tabs as $name => $fields): ?>
+        <?php $index = 0; foreach ($tabs as $lang_code => $tab_data): ?>
         <div
                 class="tab-pane <?= $index++==0?'active':''?> <?= $paneCss ?>"
                 id="<?= 'primarytab-'.$index ?>">
-            <?= $this->makePartial(base_path() . '/modules/backend/widgets/form/partials/form_fields', ['fields' => $fields]) ?>
+            <?= $this->makePartial(base_path() . '/modules/backend/widgets/form/partials/form_fields', ['fields' => $tab_data['fields']]) ?>
         </div>
         <?php endforeach ?>
     </div>

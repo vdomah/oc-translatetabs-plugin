@@ -100,6 +100,9 @@ class Translations extends FormWidgetBase
         $widget->bindToController();
 
         foreach (LocaleModel::listEnabled() as $locale=>$lang) {
+            $fields = [];
+            $this->tabs[$locale]['label'] = $lang;
+
             foreach ($config->fields as $field_name=>$field_config) {
                 $label = (isset($field_config['label'])) ? $field_config['label'] : null;
 
@@ -126,8 +129,10 @@ class Translations extends FormWidgetBase
                 $fieldObj->displayAs($fieldType, $field_config);
                 $fieldObj->value = $this->model->getTranslateAttribute($fieldObj->fieldName, $locale);
 
-                $this->tabs[$locale][] = $fieldObj;
+                $fields[] = $fieldObj;
             }
+
+            $this->tabs[$locale]['fields'] = $fields;
         }
 
         return $this->formWidgets[$index] = $widget;
