@@ -127,7 +127,7 @@ class Translations extends FormWidgetBase
                 }
 
                 $fieldObj->displayAs($fieldType, $field_config);
-                $fieldObj->value = $this->model->getTranslateAttribute($fieldObj->fieldName, $locale);
+                $fieldObj->value = $this->model->getAttributeTranslated($fieldObj->fieldName, $locale);
 
                 $fields[] = $fieldObj;
             }
@@ -176,7 +176,7 @@ class Translations extends FormWidgetBase
             return $widget->makePartial('codeeditor');
         } else {
             $field->displayAs($options['type']);
-            $field->value = $this->model->getTranslateAttribute($fieldName, $locale);
+            $field->value = $this->model->getAttributeTranslated($fieldName, $locale);
 
             return $this->renderFieldElement($field);
         }
