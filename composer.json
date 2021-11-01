@@ -1,0 +1,8 @@
+{
+  "name": "vdomah/oc-translatetabs-plugin",
+  "type": "october-plugin",
+  "description": "Adds possibility to display translatable fields grouped into tabs by locales using translations formwidget",
+  "require": {
+    "composer/installers": "~1.0"
+  }
+}

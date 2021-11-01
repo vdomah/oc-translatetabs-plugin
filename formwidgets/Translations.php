@@ -60,7 +60,8 @@ class Translations extends FormWidgetBase
     public function prepareVars()
     {
         $this->vars['model'] = $this->model;
-        $this->vars['locale'] = $this->formField->attributes['field']['locale'];
+        //error here, commented for now
+//        $this->vars['locale'] = $this->formField->attributes['field']['locale'];
     }
 
     protected function processExistingItems()

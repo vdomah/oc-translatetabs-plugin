@@ -7,3 +7,5 @@
     - Handle indexed translatable attributes.
 1.0.4:
     - Fixed Countable error when using PHP >= 7.2; Tabs names from language name instead of code.
+1.0.5:
+    - Fixed locale error in Translations widget.
